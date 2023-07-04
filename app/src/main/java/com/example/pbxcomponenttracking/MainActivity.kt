@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView
 
 import android.text.TextWatcher
 import android.util.Log
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -101,20 +102,14 @@ class MainActivity : AppCompatActivity() {
     private fun postComponentLink() {
         val queue = Volley.newRequestQueue(this)
         val url =
-            "https://script.google.com/macros/s/AKfycbzX_wCGTw9JU0KbZJEHltu2Dktdma1JtW4ARAFDairCkHFP6mc5LiVnT4y92RhqFgYTsA/exec"
+            "https://script.google.com/macros/s/AKfycbzJauAnAvlcauQM1fxXw5YC1HNCduSZXMQ0hetVR0ilATK0zAjwH7rNKS6VkoVJzvqeIg/exec"
 
-//        val requArray = listOf<String>(
-//            findViewById<TextView>(R.id.FramePNText).text.toString(),
-//            findViewById<TextView>(R.id.FrameSNText).text.toString(),
-//            findViewById<TextView>(R.id.CmpPNText).text.toString(),
-//            findViewById<TextView>(R.id.CmpSNText).text.toString(),
-//
-//        )
-//        val requestBody = requArray.joinToString(separator = "&")
         val requArray = listOf<String>(
-            "action=addLine",
-            "vName="+findViewById<TextView>(R.id.FrameSNText).text.toString(),
-            "vNumber="+findViewById<TextView>(R.id.CmpSNText).text.toString(),
+            "action=linkComponents",
+            "frame_pn="+findViewById<TextView>(R.id.FramePNText).text.toString(),
+            "frame_sn="+findViewById<TextView>(R.id.FrameSNText).text.toString(),
+            "cmp_sn="+findViewById<TextView>(R.id.CmpSNText).text.toString(),
+            "cmp_pn="+findViewById<TextView>(R.id.CmpPNText).text.toString()
         )
         val requestBody = requArray.joinToString(separator = "&")
         val stringReq: StringRequest =
@@ -132,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                     return requestBody.toByteArray(Charset.defaultCharset())
                 }
             }
-
+        stringReq.setRetryPolicy(DefaultRetryPolicy(5000, 5, 1.0F))
         queue.add(stringReq)
     }
 
