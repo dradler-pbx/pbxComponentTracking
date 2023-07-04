@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">pbxComponentTracking</string>
+    <string name="linkButtonText">Verknüpfen</string>
+    <string name="frameLabel">Rahmen</string>
+    <string name="SNFrameLabel">Seriennummer:</string>
+    <string name="componentLabel">Komponente</string>
+    <string name="cmpTypeLabel">Typ:</string>
+    <string name="cmpSNLabel">Seriennummer:</string>
+    <string name="cmpPNLabel">Artikelnummer:</string>
+    <string name="scanBtnLabel">Scannen</string>
+</resources>
